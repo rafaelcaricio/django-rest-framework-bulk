@@ -61,6 +61,9 @@ class BulkListSerializer(ListSerializer):
 
         for obj in objects_to_update:
             obj_id = getattr(obj, id_attr)
+            if hasattr(obj_id, '__dict__'):
+                obj_id = str(obj_id)
+
             obj_validated_data = all_validated_data_by_id.get(obj_id)
 
             # use model serializer to actually update the model
